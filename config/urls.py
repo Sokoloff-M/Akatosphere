@@ -37,11 +37,10 @@ urlpatterns = [
         path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     ])),
     
-    # Health Check (для мониторинга)
     path('health/', include('health_check.urls')),
 ]
 
-# Добавление статических файлов в режиме разработки
+
 from django.conf import settings
 from django.conf.urls.static import static
 
