@@ -15,23 +15,22 @@ router.register(r'categories', product_views.CategoryViewSet, basename='categori
 router.register(r'products', product_views.ProductViewSet, basename='products')
 
 urlpatterns = [
-    # Перенаправление корневого URL на документацию
     path('', RedirectView.as_view(url='/api/docs/', permanent=True)),
     
-    # Административная панель
+    
     path('admin/', admin.site.urls),
     
     # API Endpoints
     path('api/', include([
         path('', include(router.urls)),
         
-        # Аутентификация
+       
         path('auth/', include([
             path('', include('rest_framework.urls')),  # DRF Session Auth
             path('token/', include('djoser.urls.authtoken')),  # Token Auth
         ])),
         
-        # Документация
+       
         path('schema/', SpectacularAPIView.as_view(), name='schema'),
         path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
         path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
